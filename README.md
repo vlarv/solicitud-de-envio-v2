@@ -7,7 +7,7 @@ Este repositorio solo contiene la especificación funcional; no hay código.
 ## Orden de lectura
 
 1. [Ingeniería conceptual](docs/conceptual_engineering.md): problema, alcance, usuarios y permisos, entradas y salidas, estados de negocio y pantallas.
-2. [JTBD-SEN-01 · Solicitar materiales de un almacén para una fecha u OT](docs/jtbd_solicitud_envio_01.md)
+2. [JTBD-SEN-01 · Solicitar materiales de un almacén para una fecha](docs/jtbd_solicitud_envio_01.md)
 3. [JTBD-SEN-02 · Atender una solicitud con envíos totales o parciales](docs/jtbd_solicitud_envio_02.md)
 4. [JTBD-SEN-03 · Recibir lo enviado de una solicitud en el almacén de destino](docs/jtbd_solicitud_envio_03.md)
 
