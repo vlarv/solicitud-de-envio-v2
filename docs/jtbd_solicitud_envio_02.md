@@ -20,7 +20,7 @@ Tiene en su to-do list de almacén la tarjeta de una solicitud *Pendiente* o *En
 
 ### **Resumen (solución funcional esperada)**
 
-1. El usuario de origen encuentra la tarjeta en el to-do list, también con la casilla "Por enviar" del filtro. La tarjeta muestra "Desde origen", el solicitante con el destino entre paréntesis, y "En tránsito" y "Por enviar" en kg. Al abrirla, si su zona también incluye el destino y hay algo por enviar y algo por recibir, le pide elegir Enviar o Recibir. Si no hay nada por recibir, abre Enviar directamente.
+1. El usuario de origen encuentra la tarjeta en el to-do list, también con la casilla "Por enviar" del filtro. La tarjeta muestra "Desde origen", el solicitante con el destino entre paréntesis, y "En tránsito" y "Por enviar" en unidades de inventario, o "Varias unidades". Al abrirla, si su zona también incluye el destino y hay algo por enviar y algo por recibir, le pide elegir Enviar o Recibir. Si no hay nada por recibir, abre Enviar directamente.
 2. Ve en la cabecera el solicitante, la fecha requerida y el destino. Por cada artículo ve un bloque plegable, cerrado por defecto, con lo enviado frente a lo solicitado en la unidad de solicitud y una barra de avance en dos tonos (recibido y en tránsito). Al desplegarlo ve lo escaneado ahora y lo enviado antes, en tránsito o recibido. Los artículos cubiertos van al final.
 3. Arma el envío escaneando lo que despacha; lo escaneado se agrega directamente. También puede tocar la lupa, que abre un buscador a pantalla completa con todo lo del origen que puede enviar para esta solicitud: los CU con su ubicación y los SKU sin CU consolidados. Al escribir, filtra por código o nombre; al tocar un resultado, se agrega como si lo hubiera escaneado. Se agrega de a uno; si ya estaba agregado, aparece "Ya agregaste este artículo". Nunca busca fuera de la solicitud.
    - para artículos con CU, escanea cada CU, que se agrega completo;
@@ -37,7 +37,7 @@ Tiene en su to-do list de almacén la tarjeta de una solicitud *Pendiente* o *En
    - la solicitud pasa a *Enviada*, se actualizan sus cantidades enviadas y pendientes, y la tarjeta del destino muestra lo que hay en tránsito ([Estados de negocio](conceptual_engineering.md#estados-de-negocio)).
 7. Un artículo queda cubierto solo cuando se envió el 100 % de lo solicitado. Mientras quede algo por enviar, la tarjeta sigue en el to-do list del origen para envíos posteriores. Lo que el destino rechaza vuelve a quedar por enviar, salvo que la solicitud esté Trunca.
 8. Desde ⋮, que solo muestra las acciones disponibles, el usuario puede:
-   - **truncar** una solicitud *Enviada*, previa confirmación de que se dará por finalizada con lo ya enviado y no se puede deshacer. Pasa a *Trunca*, su tarjeta sale del to-do list del origen y lo que está en tránsito sigue su ciclo. En presentación variable se usa también cuando el faltante no se puede cubrir con piezas completas; el solicitante vuelve a solicitar si lo necesita.
+   - **truncar** una solicitud *Enviada*, previa confirmación de que se dará por finalizada con lo ya enviado y no se puede deshacer. Pasa a *Trunca*, su tarjeta sale del to-do list del origen y lo que está en tránsito sigue su ciclo. En presentación variable se usa también cuando el faltante no se puede cubrir con piezas completas; el solicitante vuelve a solicitar si lo necesita. Si el origen es un almacén de consignación, truncar es lo que permite facturar lo recibido cuando falta enviar: una vez que no queda nada en tránsito, se puede enviar a proveedor.
    - **rechazar** una solicitud *Pendiente*, previa confirmación de que no se puede deshacer. Pasa a *Rechazada* y su tarjeta sale del to-do list del origen y del destino.
 9. En ambos casos, el documento de la solicitud muestra quién la truncó o rechazó y cuándo. No se envían correos.
 
@@ -104,3 +104,9 @@ Tiene en su to-do list de almacén la tarjeta de una solicitud *Pendiente* o *En
 | AC-22 | Escanea un CU o SKU válido | Se agrega directamente a la lista, sin tocar nada antes. |
 | AC-23 | Toca la lupa | Ve a pantalla completa todo lo del origen que puede enviar para la solicitud, sin escribir nada; al escribir, la lista se filtra por código o nombre. |
 | AC-24 | Toca un resultado ya agregado | Aparece "Ya agregaste este artículo" y el envío no cambia. |
+
+*Consignación*
+
+| ID | Si… | Entonces… |
+| --- | --- | --- |
+| AC-25 | Trunca una solicitud de consignación y ya no queda nada en tránsito | Desde su documento web se puede enviar a proveedor con lo recibido. Mientras falte enviar y no la trunque, "Enviar a proveedor" muestra un error con lo que falta. |
