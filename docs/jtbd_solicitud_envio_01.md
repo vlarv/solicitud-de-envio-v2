@@ -35,7 +35,7 @@ Necesita materiales en un almacén de su zona de influencia para una fecha reque
 8. Desde el detalle de un artículo, el solicitante también puede elegir **Solicitar** para pedir solo ese artículo: el sistema abre un panel para indicar la fecha requerida y, al confirmar, crea y envía una solicitud de un único artículo con las mismas validaciones. Esta acción no modifica el borrador existente.
 9. Al enviar, el sistema valida los campos obligatorios y revalida la disponibilidad no reservada de cada artículo en el origen. Si alguna cantidad la supera, marca esos artículos con el disponible actual y no envía hasta que el solicitante ajuste o quite esos artículos.
 10. Una solicitud enviada pasa a *Pendiente* y ya no se puede editar. Se publica como una tarjeta en el to-do list de almacén para los usuarios de origen y de destino, y en el repositorio de documentos con una fila por artículo. No se muestra como card en la lista de existencias de FDM.
-11. El solicitante sigue sus solicitudes abiertas en el to-do list con la casilla "Solicitadas por mí" del filtro, aunque su zona no incluya el origen ni el destino. La tarjeta tiene el mismo formato para todos: "Desde origen" y la fecha requerida; los artículos; el solicitante con el destino entre paréntesis, y lo que está "En tránsito" y "Por enviar" de toda la solicitud, consolidado en kg solo en la tarjeta. Lo que está en cero no se muestra. Si no puede enviar ni recibir en una de ellas, al abrirla la ve en modo consulta: los bloques por artículo con su avance e historial, sin escaneo ni confirmación.
+11. El solicitante sigue sus solicitudes abiertas en el to-do list con "Solicitados por", un subgrupo del filtro con un almacén de destino por casilla, aunque su zona no incluya el origen ni el destino. Vienen marcados los almacenes de su zona; cada almacén marcado muestra todas sus solicitudes abiertas, sin importar quién las creó. La tarjeta tiene el mismo formato para todos: "Desde origen" y la fecha requerida; los artículos; el solicitante con el destino entre paréntesis, y lo que está "En tránsito" y "Por enviar" de toda la solicitud en unidades de inventario (por ejemplo, "2 baldes" o "3 bobinas"), o "Varias unidades" si se mezcla más de una. Lo que está en cero no se muestra. Si no puede enviar ni recibir en una de ellas, al abrirla la ve en modo consulta: los bloques por artículo con su avance e historial, sin escaneo ni confirmación.
 12. El solicitante puede cancelar su solicitud desde ⋮, previa confirmación de que la acción no se puede deshacer, mientras no tenga nada en tránsito. La solicitud pasa a *Cancelada* y su tarjeta sale del to-do list.
 
 ### **Campos involucrados en el trabajo**
@@ -85,24 +85,26 @@ Necesita materiales en un almacén de su zona de influencia para una fecha reque
 
 | ID | Si… | Entonces… |
 | --- | --- | --- |
-| AC-13 | Deja marcada la casilla "Solicitadas por mí" en el filtro del to-do list | Ve todas las solicitudes abiertas que creó, aunque su zona no incluya el origen ni el destino. |
-| AC-14 | Abre una solicitud propia en la que no puede enviar ni recibir | La ve en modo consulta, con el avance por artículo y sin escaneo ni confirmación. |
+| AC-13 | Abre el filtro del to-do list | En "Solicitados por" ve los almacenes de destino con solicitudes abiertas, con los de su zona marcados. |
+| AC-14 | Marca un almacén de destino en "Solicitados por" | Ve todas las solicitudes abiertas hacia ese almacén, sin importar quién las creó ni si su zona incluye el origen. |
+| AC-15 | Abre una solicitud en la que no puede enviar ni recibir | La ve en modo consulta, con el avance por artículo y sin escaneo ni confirmación. |
 
 *Cancelar*
 
 | ID | Si… | Entonces… |
 | --- | --- | --- |
-| AC-15 | El creador elige Cancelar solicitud en ⋮, sin nada en tránsito, y confirma | La solicitud queda Cancelada, su tarjeta sale del to-do list y el documento muestra quién la canceló y cuándo. |
-| AC-16 | Hay algo en tránsito, o quien abre la solicitud no es su creador | La opción Cancelar solicitud no aparece. |
+| AC-16 | El creador elige Cancelar solicitud en ⋮, sin nada en tránsito, y confirma | La solicitud queda Cancelada, su tarjeta sale del to-do list y el documento muestra quién la canceló y cuándo. |
+| AC-17 | Hay algo en tránsito, o quien abre la solicitud no es su creador | La opción Cancelar solicitud no aparece. |
 
 *Destino*
 
 | ID | Si… | Entonces… |
 | --- | --- | --- |
-| AC-17 | Abre el destino y escribe en el buscador | Ve solo los almacenes de su zona, distintos del origen, que coinciden con lo escrito. |
+| AC-18 | Abre el destino y escribe en el buscador | Ve solo los almacenes de su zona, distintos del origen, que coinciden con lo escrito. |
 
 *Tarjeta del to-do list*
 
 | ID | Si… | Entonces… |
 | --- | --- | --- |
-| AC-18 | Ve una solicitud en el to-do list | La tarjeta muestra "Desde origen", la fecha, los artículos, el solicitante con el destino entre paréntesis, y "En tránsito" y "Por enviar" en kg; lo que está en cero no aparece. Es igual para el origen, el destino y el creador. |
+| AC-19 | Ve una solicitud en el to-do list | La tarjeta muestra "Desde origen", la fecha, los artículos, el solicitante con el destino entre paréntesis, y "En tránsito" y "Por enviar" en unidades de inventario (por ejemplo, "2 baldes"); lo que está en cero no aparece. Es igual para todos los usuarios. |
+| AC-20 | La solicitud mezcla artículos con distinta unidad de inventario | La tarjeta muestra "Varias unidades" en lugar de la cantidad. |
